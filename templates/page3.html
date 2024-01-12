@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/page3.css">
+  <title>Survey - Page 3</title>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <h2>Survey Question 7</h2>
+      <p>How much are you willing to spend in AI tools?</p>
+      <label><input type="radio" name="spending" value="free"> 0$ (Free)</label>
+      <label><input type="radio" name="spending" value="1-10"> 1$ - 10$</label>
+      <label><input type="radio" name="spending" value="11-50"> 11$ - 50$</label>
+      <label><input type="radio" name="spending" value="51-200"> 51$ - 200$</label>
+      <label><input type="radio" name="spending" value="200+"> + 200$</label>
+    </div>
+
+    <div class="content">
+      <h2>Survey Question 8</h2>
+      <p>In which way are you expecting these tools to help you?</p>
+      <label><input type="checkbox" name="expectations" value="profiling"> Profiling and prediction</label><br>
+      <label><input type="checkbox" name="expectations" value="assessment"> Assessment and evaluation</label><br>
+      <label><input type="checkbox" name="expectations" value="personalisation"> Personalisation</label><br>
+      <label><input type="checkbox" name="expectations" value="tutoring"> Intelligent tutoring systems</label><br>
+    </div>
+
+    <div class="content">
+      <h2>Survey Question 9</h2>
+      <p>In what manners would you use AI tools?</p>
+      <label><input type="radio" name="usage_manner" value="personal"> Personal</label><br>
+      <label><input type="radio" name="usage_manner" value="professional"> Professional</label><br>
+      <label><input type="radio" name="usage_manner" value="both"> Both</label><br>
+    </div>
+
+    <button class="button" onclick="navigateToPage('page4.html')">Next</button>
+  </div>
+
+  <script>
+    function navigateToPage(page) {
+      document.querySelector('.container').style.transform = 'translateX(-100%)';
+      setTimeout(function() {
+        window.location.href = page;
+      }, 500);
+    }
+  </script>
+</body>
+</html>
+
