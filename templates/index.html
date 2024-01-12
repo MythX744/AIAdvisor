@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai Tools Advisor</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="/">
+                        <span class="icon">
+                            <ion-icon name="infinite-outline"></ion-icon>
+                        </span>
+                        <span class="title">Ai Advisor</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart1">
+                        <span class="icon">
+                            <ion-icon name="stats-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Status vs Price</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart2">
+                        <span class="icon">
+                            <ion-icon name="pie-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Gender vs Price</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart3">
+                        <span class="icon">
+                            <ion-icon name="bar-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Usage vs Status</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart4">
+                        <span class="icon">
+                            <ion-icon name="stats-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Gender</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart5">
+                        <span class="icon">
+                            <ion-icon name="pie-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Usage vs Preference</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart6">
+                        <span class="icon">
+                            <ion-icon name="bar-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Usage vs Age</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart7">
+                        <span class="icon">
+                            <ion-icon name="stats-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Status vs Type of use AI Tool </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart8">
+                        <span class="icon">
+                            <ion-icon name="pie-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Usage vs Preference</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart9">
+                        <span class="icon">
+                            <ion-icon name="bar-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Usage vs Age</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/chart10">
+                        <span class="icon">
+                            <ion-icon name="stats-chart-outline"></ion-icon>
+                        </span>
+                        <span class="title">Status vs Type of use AI Tool </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/bonus">
+                        <span class="icon">
+                            <ion-icon name="key-outline"></ion-icon>
+                        </span>
+                        <span class="title">Bonus </span>
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/img.png" alt="">
+                </div>
+            </div>
+
+            <!-- ======================= Cards ================== -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">Chart Analysis</div>
+                        <div class="cardName">Ai Advisor</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="analytics-outline"></ion-icon>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ================ Order Details List ================= -->
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>{{ title }}</h2>
+                    </div>
+                    <img src="data:image/png;base64,{{ plot_url }}" alt="hh" style="align-self">
+                </div>
+
+                <!-- ================= New Customers ================ -->
+                <div class="recentCustomers">
+                    <div class="cardHeader">
+                        <h2>Analysis</h2>
+                    </div>
+                    <p style="font-size: 20px;">
+                        {%  for point in analysis %}
+                            {{ point }}<br>
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="/static/js/script.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

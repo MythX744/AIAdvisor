@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Tools Extended Selector</title>
+<link rel="stylesheet" href="/static/css/styleBonus.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">AI</span> Tools Extended Selector</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="/">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Select AI Usage Categories:</h2>
+        <form>
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="imageGen" name="aiCategory" value="Image Generation">
+                <label for="imageGen">Image Generation</label><br>
+
+                <input type="checkbox" id="chatbot" name="aiCategory" value="Chatbot">
+                <label for="chatbot">Chatbot</label><br>
+
+                <input type="checkbox" id="dataAnalysis" name="aiCategory" value="Data Analysis">
+                <label for="dataAnalysis">Data Analysis</label><br>
+
+                <input type="checkbox" id="voiceRecognition" name="aiCategory" value="Voice Recognition">
+                <label for="voiceRecognition">Voice Recognition</label><br>
+
+                <input type="checkbox" id="nlp" name="aiCategory" value="Natural Language Processing">
+                <label for="nlp">NLP</label><br>
+
+                <input type="checkbox" id="predictiveAnalytics" name="aiCategory" value="Predictive Analytics">
+                <label for="predictiveAnalytics">Predictive Analytics</label><br>
+
+                <input type="checkbox" id="robotics" name="aiCategory" value="Robotics">
+                <label for="robotics">Robotics</label><br>
+
+                <input type="checkbox" id="machineLearning" name="aiCategory" value="Machine Learning">
+                <label for="machineLearning">Machine Learning</label><br>
+
+                <input type="checkbox" id="computerVision" name="aiCategory" value="Computer Vision">
+                <label for="computerVision">Computer Vision</label><br>
+
+                <input type="checkbox" id="augmentedReality" name="aiCategory" value="Augmented Reality">
+                <label for="augmentedReality">Augmented Reality</label><br>
+
+                <input type="checkbox" id="virtualReality" name="aiCategory" value="Virtual Reality">
+                <label for="virtualReality">Virtual Reality</label><br>
+
+                <input type="checkbox" id="biometrics" name="aiCategory" value="Biometrics">
+                <label for="biometrics">Biometrics</label><br>
+
+                <input type="checkbox" id="blockchain" name="aiCategory" value="Blockchain">
+                <label for="blockchain">Blockchain</label><br>
+
+                <input type="checkbox" id="iot" name="aiCategory" value="Internet of Things">
+                <label for="iot">Internet of Things (IoT)</label><br>
+
+                <input type="button" onclick="displayAITools()" value="Find AI Tools">
+            </div>
+        </form>
+        <div id="aiToolList"></div>
+    </div>
+
+    <script src="/static/js/bonus.js"></script>
+</body>
+</html>
