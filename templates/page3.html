@@ -36,15 +36,16 @@
           <label><input type="radio" name="usage_manner" value="both"> Both</label><br>
         </div>
 
-        <button class="button" onclick="navigateToPage('{{ url_for('page4') }}')">Next</button>
+        <button type="button" class="button" onclick="navigateToPage('{{ url_for('page4') }}')">Next</button>
       </div>
     </form>
   <script>
     function navigateToPage(page) {
-      document.querySelector('.container').style.transform = 'translateX(-200%)';
-      setTimeout(function() {
-        window.location.href = page;
-      }, 500);
+        document.querySelector('.container').style.transform = 'translateX(-100%)';
+        setTimeout(function () {
+            // Manually submit the form before redirecting
+            document.querySelector('form').submit();
+        }, 1000);
     }
   </script>
 </body>

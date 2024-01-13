@@ -66,16 +66,16 @@
     </form>
   <script>
     function navigateToPage(page) {
-      document.querySelector('.container').style.transform = 'translateX(-200%)';
-      setTimeout(function() {
-        window.location.href = page;
-      }, 500);
+        document.querySelector('.container').style.transform = 'translateX(-100%)';
+        setTimeout(function () {
+            // Manually submit the form before redirecting
+            document.querySelector('form').submit();
+        }, 1000);
     }
 
     function submitSurvey() {
       // Perform any necessary actions on survey submission
       alert('Survey submitted successfully!');
-        navigateToPage('welcome.html');
     }
   </script>
 </body>
