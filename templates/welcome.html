@@ -7,17 +7,18 @@
   <title>Welcome to the Survey</title>
 </head>
 <body>
-  <div class="container">
-    <div class="content">
-      <h2>Welcome to the Survey</h2>
-      <p>We appreciate your participation. Click the button below to start the survey.</p>
-      <button class="button" onclick="navigateToPage('page1.html')">Start Survey</button>
-    </div>
-  </div>
-
+    <form action="/page1" method="get">
+      <div class="container">
+        <div class="content">
+          <h2>Welcome to the Survey</h2>
+          <p>We appreciate your participation. Click the button below to start the survey.</p>
+          <button type="button" class="button" onclick="navigateToPage('{{ url_for('page1') }}')">Start Survey</button>
+        </div>
+      </div>
+    </form>
   <script>
     function navigateToPage(page) {
-      document.querySelector('.container').style.transform = 'translateX(-100%)';
+      document.querySelector('.container').style.transform = 'translateX(-200%)';
       setTimeout(function() {
         window.location.href = page;
       }, 500);

@@ -7,65 +7,66 @@
   <title>Survey - Page 4</title>
 </head>
 <body>
-  <div class="container">
-    <div class="content">
-      <h2>Survey Question 10</h2>
-      <p>Choose your preferred performance rate for AI tools:</p>
-      <div class="rating">
-        <input type="radio" id="rating1" name="rating" value="1" />
-        <label for="rating1">1</label>
-        <input type="radio" id="rating2" name="rating" value="2" />
-        <label for="rating2">2</label>
-        <input type="radio" id="rating3" name="rating" value="3" />
-        <label for="rating3">3</label>
-        <input type="radio" id="rating4" name="rating" value="4" />
-        <label for="rating4">4</label>
-        <input type="radio" id="rating5" name="rating" value="5" />
-        <label for="rating5">5</label>
-        <input type="radio" id="rating6" name="rating" value="6" />
-        <label for="rating6">6</label>
-        <input type="radio" id="rating7" name="rating" value="7" />
-        <label for="rating7">7</label>
-        <input type="radio" id="rating8" name="rating" value="8" />
-        <label for="rating8">8</label>
-        <input type="radio" id="rating9" name="rating" value="9" />
-        <label for="rating9">9</label>
-        <input type="radio" id="rating10" name="rating" value="10" />
-        <label for="rating10">10</label>
+    <form method="post" action="/page4">
+      <div class="container">
+        <div class="content">
+          <h2>Survey Question 10</h2>
+          <p>Choose your preferred performance rate for AI tools:</p>
+          <div class="rating">
+            <input type="radio" id="rating1" name="rating" value="10" />
+            <label for="rating1">10</label>
+            <input type="radio" id="rating2" name="rating" value="9" />
+            <label for="rating2">9</label>
+            <input type="radio" id="rating3" name="rating" value="8" />
+            <label for="rating3">8</label>
+            <input type="radio" id="rating4" name="rating" value="7" />
+            <label for="rating4">7</label>
+            <input type="radio" id="rating5" name="rating" value="6" />
+            <label for="rating5">6</label>
+            <input type="radio" id="rating6" name="rating" value="5" />
+            <label for="rating6">5</label>
+            <input type="radio" id="rating7" name="rating" value="4" />
+            <label for="rating7">4</label>
+            <input type="radio" id="rating8" name="rating" value="3" />
+            <label for="rating8">3</label>
+            <input type="radio" id="rating9" name="rating" value="2" />
+            <label for="rating9">2</label>
+            <input type="radio" id="rating10" name="rating" value="1" />
+            <label for="rating10">1</label>
+          </div>
+        </div>
+
+        <div class="content">
+          <h2>Survey Question 11</h2>
+          <p>Rate how much are you open to share your data with AI tools in exchange for personalized experiences, such as targeted advertising or content recommendations?</p>
+          <div class="ratingstar">
+            <input type="radio" id="star5" name="rating1" value="5" />
+            <label for="star5">★</label>
+            <input type="radio" id="star4" name="rating1" value="4" />
+            <label for="star4">★</label>
+            <input type="radio" id="star3" name="rating1" value="3" />
+            <label for="star3">★</label>
+            <input type="radio" id="star2" name="rating1" value="2" />
+            <label for="star2">★</label>
+            <input type="radio" id="star1" name="rating1" value="1" />
+            <label for="star1">★</label>
+          </div>
+        </div>
+
+        <div class="content">
+          <h2>Survey Question 12</h2>
+          <p>What impact do you think AI tools will have on society?</p>
+          <label><input type="radio" name="impact" value="positive"> Positively</label>
+          <label><input type="radio" name="impact" value="negative"> Negatively</label>
+          <label><input type="radio" name="impact" value="neutral"> Neutral</label>
+        </div>
+
+        <button class="button" onclick="submitSurvey()">Submit</button>
       </div>
-    </div>
-
-    <div class="content">
-      <h2>Survey Question 11</h2>
-      <p>Rate how much are you open to share your data with AI tools in exchange for personalized experiences, such as targeted advertising or content recommendations?</p>
-      <div class="ratingstar">
-        <input type="radio" id="star5" name="rating" value="5" />
-        <label for="star5">★</label>
-        <input type="radio" id="star4" name="rating" value="4" />
-        <label for="star4">★</label>
-        <input type="radio" id="star3" name="rating" value="3" />
-        <label for="star3">★</label>
-        <input type="radio" id="star2" name="rating" value="2" />
-        <label for="star2">★</label>
-        <input type="radio" id="star1" name="rating" value="1" />
-        <label for="star1">★</label>
-      </div>
-    </div>
-
-    <div class="content">
-      <h2>Survey Question 12</h2>
-      <p>What impact do you think AI tools will have on society?</p>
-      <label><input type="radio" name="impact" value="positive"> Positively</label>
-      <label><input type="radio" name="impact" value="negative"> Negatively</label>
-      <label><input type="radio" name="impact" value="neutral"> Neutral</label>
-    </div>
-
-    <button class="button" onclick="submitSurvey()">Submit</button>
-  </div>
-
+    </form>
   <script>
     function navigateToPage(page) {
-      document.querySelector('.container').style.transform = 'translateX(-100%)';
+      document.querySelector('.container').style.transform = 'translateX(-200%)';
       setTimeout(function() {
         window.location.href = page;
       }, 500);
@@ -74,7 +75,7 @@
     function submitSurvey() {
       // Perform any necessary actions on survey submission
       alert('Survey submitted successfully!');
-        navigateToPage('congratulations.html');
+        navigateToPage('welcome.html');
     }
   </script>
 </body>

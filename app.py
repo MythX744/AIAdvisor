@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -8,7 +8,7 @@ import base64
 app = Flask(__name__)
 
 # import our excel file
-file_path = 'C:/Users/malak/TP-ML/AI-Advisor.xlsx'
+file_path = 'AI-Advisor.xlsx'
 
 # our dataframe
 df = pd.read_excel(file_path)
@@ -449,8 +449,73 @@ def chart10():
 
 @app.route('/bonus', methods=['GET'])
 def bonus():
-    return render_template('bonus.html')
+    return render_template('welcome.html')
 
+#Mehdi's part:
+app.config['user_data'] = []
+app.config['advisor_data'] = []
+
+@app.route('/page1', methods=['GET', 'POST'])
+def page1():
+    if request.method == 'POST':
+        gender = request.form['gender']
+        age = request.form['age']
+        status = request.form['status']
+        app.config['user_data'].append({'gender': gender, 'age': age, 'status': status})
+
+        return redirect(url_for('page2'))
+
+    return render_template('page1.html')
+
+@app.route('/page2', methods=['GET', 'POST'])
+def page2():
+    if request.method == 'POST':
+        usage = request.form['usage']
+        field = request.form.getlist('field')
+        tasks = request.form.getlist('tasks')
+        app.config['user_data'].append({'usage': usage, 'field': field, 'tasks': tasks})
+        app.config['advisor_data'].append({'field': field, 'tasks': tasks})
+
+        return redirect(url_for('page3'))
+
+    return render_template('page2.html')
+
+@app.route('/page3', methods=['GET', 'POST'])
+def page3():
+    if request.method == 'POST':
+        spending = request.form['spending']
+        expectations = request.form.getlist('expectations')
+        usage_manner = request.form['usage_manner']
+        app.config['user_data'].append({'spending': spending, 'expectations': expectations, 'usage_manner': usage_manner})
+        app.config['advisor_data'].append({'spending': spending, 'expectations': expectations})
+
+        return redirect(url_for('page4'))
+
+    return render_template('page3.html')
+
+@app.route('/page4', methods=['GET', 'POST'])
+def page4():
+    if request.method == 'POST':
+        rating = request.form['rating']
+        rating_star = request.form['rating1']
+        impact = request.form['impact']
+        app.config['user_data'].append({'rating': rating, 'rating_star': rating_star, 'impact': impact})
+        app.config['advisor_data'].append({'rating': rating, 'rating_star': rating_star})
+
+        return redirect('/summary')
+
+    return render_template('page4.html')
+
+@app.route('/summary')
+def summary():
+    all_data = app.config['user_data']
+    return render_template('summary.html', all_data=all_data)
+
+
+all_user_data = app.config['user_data']
+all_advisor_data = app.config['advisor_data']
+print("all user data: " + str(all_user_data))
+print("all advisor data: " + str(all_advisor_data))
 
 if __name__ == '__main__':
     app.run(debug=True)
