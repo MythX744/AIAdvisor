@@ -1,15 +1,95 @@
+@font-face {
+    font-family: 'Sora';
+    src: url('/font/Sora-Bold.ttf') format('truetype');
+    src: url('/font/Sora-ExtraBold.ttf') format('truetype');
+    src: url('/font/Sora-ExtraLight.ttf') format('truetype');
+    src: url('/font/Sora-Light.ttf') format('truetype');
+    src: url('/font/Sora-Medium.ttf') format('truetype');
+    src: url('/font/Sora-Regular.ttf') format('truetype');
+    src: url('/font/Sora-SemiBold.ttf') format('truetype');
+    src: url('/font/Sora-Thin.ttf') format('truetype');
+}
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Sora Regular", sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    background: linear-gradient(to bottom, #2a2185, #ffffff);
+    background-size: cover;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.pattern-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/images/gplay.png'); /* Pattern image */
+    opacity: 0.2; /* Adjust the opacity of the pattern overlay */
+    z-index: 0;
+    pointer-events: none;
+}
+
+.survey-responses {
+    margin: 0 0 700px 50px;
+    padding: 0 0 0 0;
+}
+.survey-responses h2 {
+    font-family: "Sora Bold", sans-serif;
+    font-size: 45px;
+    color: #cccccc;
+    text-shadow: 2px 2px 4px #333;
+}
+.survey-responses p {
+    font-family: "Sora SemiBold", sans-serif;
+    font-size: 30px;
+    color: #cccccc;
+    margin: 0 0 0 10px;
+    text-shadow: 2px 2px 4px #333;
+}
+.radar-section {
+
+}
+
+.radar{
+    margin: 0 0 0 30px;
+    display: flex;
+}
+
+footer {
+     font-family: "Sora Regular", sans-serif;
+     font-weight: 400;
+     background: #333;
+     color: #fff;
+     text-align: center;
+     margin-top: -50px;
+     font-size: 16px;
+}
+
+#mainBase {
+    margin-top: 50px;
+    flex: 1;
+    padding-bottom: 100px;
+}
+.containerBase {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+#content-wrapBase {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 .radarChart {
-    margin: 150px 0 0 0;
+    margin: 0 0 0 0;
     display: flex;
     flex-direction: column;
-    padding: 0 0 80px 30px;
 }
 
 .chart {
@@ -17,8 +97,7 @@ body {
 }
 
 svg {
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    margin: 0 0 0 0;
 }
 
 text {
@@ -27,12 +106,9 @@ text {
     fill: #333; /* Text color */
 }
 
-path {
-    fill: rgba(0, 123, 255, 0.7);
-}
 
 .legend {
-    font-family: 'Raleway', sans-serif;
+    font-family: "Sora SemiBold", sans-serif;
     fill: #333333;
 }
 
