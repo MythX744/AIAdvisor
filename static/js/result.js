@@ -10,7 +10,8 @@ function fetchData() {
                 subArrays.forEach(function(subArray, subIndex) {
 				var subArray_cleaned = [subArray];
 				console.log('subArray:', subArray_cleaned);
-				drawSpiderChart(subArray_cleaned);
+				console.log('subIndex:', subIndex);
+				drawSpiderChart(subArray_cleaned, subIndex);
 				 });
             });
         },
@@ -21,7 +22,7 @@ function fetchData() {
 }
 
 // Function to draw spider chart using D3.js
-function drawSpiderChart(cleanedData) {
+function drawSpiderChart(cleanedData, subIndex) {
     console.log('Cleaned Data:', cleanedData);
     // Your D3.js code here using the cleaned data
     // Adjust IDs, dimensions, or any other parameters as needed
@@ -29,8 +30,18 @@ function drawSpiderChart(cleanedData) {
 				width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
 				height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-    var color = d3.scale.ordinal()
-				.range(["#EDC951","#CC333F","#00A0B0"]);
+	if(subIndex == 0) {
+    	var color = d3.scale.ordinal()
+				.range(["#EDC951"]);
+	}
+	else if(subIndex == 1) {
+		var color = d3.scale.ordinal()
+				.range(["#CC333F"]);
+	}
+	else if(subIndex == 2) {
+		var color = d3.scale.ordinal()
+				.range(["#00A0B0"]);
+	}
 
     var radarChartOptions = {
 			  w: width,
@@ -46,18 +57,25 @@ function drawSpiderChart(cleanedData) {
 
     console.log('Data:', data);
 
-    // Call function to draw the Radar chart
-    RadarChart(".radarChart", data , radarChartOptions);
+    if(subIndex == 0) {
+		RadarChart(".radarChart1", data, radarChartOptions);
+	}
+	else if(subIndex == 1) {
+		RadarChart(".radarChart2", data, radarChartOptions);
+	}
+	else if(subIndex == 2) {
+		RadarChart(".radarChart3", data, radarChartOptions);
+	}
 
 }
 function RadarChart(id, data , options) {
     var cfg = {
-	 w: 500,				//Width of the circle
-	 h: 500,				//Height of the circle
+	 w: 400,				//Width of the circle
+	 h: 400,				//Height of the circle
 	 margin: {top: 20, right: 20, bottom: 20, left: 20}, //The margins of the SVG
 	 levels: 3,				//How many levels or inner circles should there be drawn
 	 maxValue: 0, 			//What is the value that the biggest circle will represent
-	 labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
+	 labelFactor: 1.42, 	//How much farther than the radius of the outer circle should the labels be placed
 	 wrapWidth: 120, 		//The number of pixels after which a label needs to be given a new line
 	 opacityArea: 0.35, 	//The opacity of the area of the blob
 	 dotRadius: 4, 			//The size of the colored circles of each blog
@@ -110,7 +128,7 @@ function RadarChart(id, data , options) {
 			.attr("transform", "translate(" + (400) + "," + (400) + ")");
 
 	/////////////////////////////////////////////////////////
-	////////// Glow filter for some extra pizzazz ///////////
+	////////// Glow filter //////////////////////////////////
 	/////////////////////////////////////////////////////////
 
 	//Filter for the outside glow
@@ -174,7 +192,7 @@ function RadarChart(id, data , options) {
 	//Append the labels at each axis
 	axis.append("text")
 		.attr("class", "legend")
-		.style("font-size", "11px")
+		.style("font-size", "12px")
 		.attr("text-anchor", "middle")
 		.attr("dy", "0.35em")
 		.attr("x", function(d, i){ return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice*i - Math.PI/2); })
@@ -285,7 +303,8 @@ function RadarChart(id, data , options) {
 	//Set up the small tooltip for when you hover over a circle
 	var tooltip = g.append("text")
 		.attr("class", "tooltip")
-		.style("opacity", 0);
+		.style("opacity", 0)
+		.style("font-size", "17px");
 
 	/////////////////////////////////////////////////////////
 	/////////////////// Helper Function /////////////////////

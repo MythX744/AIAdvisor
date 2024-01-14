@@ -505,14 +505,9 @@ def page4():
         app.config['user_data'].append({'rating': rating, 'rating_star': rating_star, 'impact': impact})
         app.config['advisor_data'].append({'rating': rating, 'rating_star': rating_star})
 
-        return redirect('/summary')
+        return redirect('/BonusResult')
 
     return render_template('page4.html')
-
-@app.route('/summary')
-def summary():
-    all_data = app.config['user_data']
-    return render_template('summary.html', all_data=all_data)
 
 
 all_user_data = app.config['user_data']
@@ -522,7 +517,10 @@ print("all advisor data: " + str(all_advisor_data))
 
 
 @app.route('/BonusResult', methods=['GET'])
-
+def result():
+    all_data = app.config['user_data']
+    print(all_data)
+    return render_template('result.html', all_data=all_data)
 
 @app.route('/get_cleaned_data', methods=['GET'])
 def get_cleaned_data():
