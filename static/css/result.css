@@ -1,0 +1,41 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.radarChart {
+    margin: 150px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 80px 30px;
+}
+
+.chart {
+    margin: 20px;
+}
+
+svg {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+text {
+    font-size: 12px;
+    text-anchor: middle;
+    fill: #333; /* Text color */
+}
+
+path {
+    fill: rgba(0, 123, 255, 0.7);
+}
+
+.legend {
+    font-family: 'Raleway', sans-serif;
+    fill: #333333;
+}
+
+.tooltip {
+    fill: #333333;
+}

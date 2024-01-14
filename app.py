@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -8,7 +8,7 @@ import base64
 app = Flask(__name__)
 
 # import our excel file
-file_path = 'C:/Users/malak/TP-ML/AI-Advisor.xlsx'
+file_path = 'AI-Advisor.xlsx'
 
 # our dataframe
 df = pd.read_excel(file_path)
@@ -33,6 +33,8 @@ data_exploded2 = df.explode('separated-Field')
 # Handle missing values
 data_exploded2.dropna(subset=['separated-Field'], inplace=True)
 choices_counts2 = data_exploded2['separated-Field'].value_counts()
+
+
 
 # Tasks
 df['separated-Tasks'] = df['Tasks'].str.split(';')
@@ -449,7 +451,46 @@ def chart10():
 
 @app.route('/bonus', methods=['GET'])
 def bonus():
-    return render_template('bonus.html')
+    return render_template('Result.html')
+
+@app.route('/BonusResult', methods=['GET'])
+
+
+@app.route('/get_cleaned_data', methods=['GET'])
+def get_cleaned_data():
+    choices_counts_df = pd.DataFrame({
+        "axis": choices_counts.index,
+        "value": choices_counts.values
+    })
+
+    choices_counts2_df = pd.DataFrame({
+        "axis": choices_counts2.index,
+        "value": choices_counts2.values
+    })
+
+    choices_counts3_df = pd.DataFrame({
+        "axis": choices_counts3.index,
+        "value": choices_counts3.values
+    })
+
+    cleaned_dfs = [choices_counts_df, choices_counts2_df, choices_counts3_df]
+    cleaned_data = []
+
+    for df in cleaned_dfs:
+        df2 = df.dropna(subset=['axis']).replace('', pd.NA).dropna(subset=['axis'])
+        # Convert DataFrame to a list of dictionaries
+        data = df2.to_dict(orient='records')
+
+        # Convert axis and value to a structure without quotes
+        data = [{key: str(val) for key, val in entry.items()} for entry in data]
+
+        cleaned_data.append(data)
+
+    # Wrap the cleaned_data list in another list to match the structure you need
+    cleaned_data = [cleaned_data]
+
+    print(cleaned_data)
+    return jsonify(cleaned_data=cleaned_data)
 
 
 if __name__ == '__main__':
