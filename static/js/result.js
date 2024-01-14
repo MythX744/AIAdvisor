@@ -339,6 +339,40 @@ function RadarChart(id, data , options) {
 	}//wrap
 
 }//RadarChart page loads
+
+function searchAxis(targetAxisArray) {
+	$.ajax({
+        url: '/get_cleaned_data',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+			console.log('Response:', response.cleaned_data);
+			var count = 0;
+			var result = [];
+			response.cleaned_data.forEach(function(subArrays, index) {
+                subArrays.forEach(function(subArray, subIndex) {
+				var subArray_cleaned = [subArray];
+				var innerArray = subArray_cleaned[0];
+				var innerResult = [];
+				for (var i = 0; i < innerArray.length; i++) {
+					for (var j = 0; j < targetAxisArray[count].length; j++) {
+						if (innerArray[i].axis === targetAxisArray[count][j]) {
+							innerResult.push(innerArray[i].value)
+						}
+					}
+				}
+				result.push(innerResult);
+				count++;
+				});
+            });
+			return result;
+        },
+        error: function(error) {
+            console.error('Error fetching cleaned data:', error);
+        }
+    });
+
+}
 document.addEventListener('DOMContentLoaded', function() {
     fetchData();
 });

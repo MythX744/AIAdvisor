@@ -18,7 +18,7 @@
         <h2>Thank you for participating in our survey!</h2>
         <div class="your-aitools"></div>
     </div>
-    <div class="radar-section">
+    <div class="radar-section" id="radar-section" data-userdata='{{ all_data | tojson | safe }}'>
         <div class="radar">
             <div class="radarChart1" id="radarChart"></div>
             <div class="radar-section-description"></div>
@@ -42,3 +42,27 @@
 <script src="/static/js/result.js"></script>
 </body>
 </html>
+<script>
+    var allData = JSON.parse(document.getElementById('radar-section').getAttribute('data-userdata'));
+    console.log('All Data:', allData);
+
+
+    var extractedDataArray = [[], [], []];
+
+    // Iterate over the array and extract data
+    allData.forEach(function(item) {
+        if ('expectations' in item) {
+            extractedDataArray[0].push(item['expectations']);
+        }
+        if ('field' in item) {
+            extractedDataArray[1].push(item['field']);
+        }
+        if ('tasks' in item) {
+            extractedDataArray[2].push(item['tasks']);
+        }
+    });
+
+    // Log the extracted data array
+    console.log('Extracted Data Array:', extractedDataArray);
+
+</script>
