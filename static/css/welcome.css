@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+    background: linear-gradient(to bottom, #2a2185, #ffffff);
     transition: transform 1.5s ease-in-out;
   }
 
@@ -28,7 +28,7 @@ body {
     padding: 10px 20px;
     font-size: 18px;
     cursor: pointer;
-    background-color: #3498db;
+    background-color: #2a20F0;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -36,5 +36,5 @@ body {
   }
 
   .button:hover {
-    background-color: #2980b9;
+    background-color: #2a2185;
   }
