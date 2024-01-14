@@ -13,7 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #f3f3f3;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 1.5s ease-in-out;
   }
 
   .content {
@@ -69,7 +69,8 @@ body {
 
   .rating {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: left;
   }
 
   .rating input {

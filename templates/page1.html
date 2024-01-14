@@ -7,42 +7,45 @@
   <title>Survey - Page 1</title>
 </head>
 <body>
-  <div class="container">
-    <div class="content">
-      <h2>Survey Question 1</h2>
-      <p>Choose your gender:</p>
-      <label><input type="radio" name="gender" value="male"> Male</label>
-      <label><input type="radio" name="gender" value="female"> Female</label>
-    </div>
+    <form method="post" action="/page1">
+      <div class="container">
+        <div class="content">
+          <h2>Survey Question 1</h2>
+          <p>Choose your gender:</p>
+          <label><input type="radio" name="gender" value="male"> Male</label>
+          <label><input type="radio" name="gender" value="female"> Female</label>
+        </div>
 
-    <div class="content">
-      <h2>Survey Question 2</h2>
-      <p>Choose your age:</p>
-      <label><input type="radio" name="age" value="under18"> Under 18</label>
-      <label><input type="radio" name="age" value="18-24"> 18-24</label>
-      <label><input type="radio" name="age" value="25-44"> 25-44</label>
-      <label><input type="radio" name="age" value="45-64"> 45-64</label>
-      <label><input type="radio" name="age" value="65+"> 65 and older</label>
-    </div>
+        <div class="content">
+          <h2>Survey Question 2</h2>
+          <p>Choose your age:</p>
+          <label><input type="radio" name="age" value="under18"> Under 18</label>
+          <label><input type="radio" name="age" value="18-24"> 18-24</label>
+          <label><input type="radio" name="age" value="25-44"> 25-44</label>
+          <label><input type="radio" name="age" value="45-64"> 45-64</label>
+          <label><input type="radio" name="age" value="65+"> 65 and older</label>
+        </div>
 
-    <div class="content">
-      <h2>Survey Question 3</h2>
-      <p>Choose your status:</p>
-      <label><input type="radio" name="status" value="student"> Student</label>
-      <label><input type="radio" name="status" value="employee"> Employee</label>
-      <label><input type="radio" name="status" value="retired"> Retired/Unemployed</label>
-    </div>
+        <div class="content">
+          <h2>Survey Question 3</h2>
+          <p>Choose your status:</p>
+          <label><input type="radio" name="status" value="student"> Student</label>
+          <label><input type="radio" name="status" value="employee"> Employee</label>
+          <label><input type="radio" name="status" value="retired"> Retired/Unemployed</label>
+        </div>
 
-    <button class="button" onclick="navigateToPage('page2.html')">Next</button>
-  </div>
-
+        <button type="button" class="button" onclick="navigateToPage('{{ url_for('page2') }}')">Next</button>
+      </div>
+    </form>
   <script>
     function navigateToPage(page) {
-      document.querySelector('.container').style.transform = 'translateX(-100%)';
-      setTimeout(function() {
-        window.location.href = page;
-      }, 500);
+        document.querySelector('.container').style.transform = 'translateX(-100%)';
+        setTimeout(function () {
+            // Manually submit the form before redirecting
+            document.querySelector('form').submit();
+        }, 1000);
     }
-  </script>
+</script>
+
 </body>
 </html>

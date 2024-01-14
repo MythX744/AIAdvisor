@@ -7,52 +7,56 @@
   <title>Survey - Page 2</title>
 </head>
 <body>
-  <div class="container">
-    <div class="content">
-      <h2>Survey Question 4</h2>
-      <p>What is your usage frequency for AI tools per day?</p>
-      <label><input type="radio" name="usage" value="none"> None</label>
-      <label><input type="radio" name="usage" value="light"> Light</label>
-      <label><input type="radio" name="usage" value="moderate"> Moderate</label>
-      <label><input type="radio" name="usage" value="high"> High</label>
-    </div>
+    <form method="post" action="/page2">
+      <div class="container">
+        <div class="content">
+          <h2>Survey Question 4</h2>
+          <p>What is your usage frequency for AI tools per day?</p>
+          <label><input type="radio" name="usage" value="none"> None</label>
+          <label><input type="radio" name="usage" value="light"> Light</label>
+          <label><input type="radio" name="usage" value="moderate"> Moderate</label>
+          <label><input type="radio" name="usage" value="high"> High</label>
+        </div>
 
-    <div class="content">
-      <h2>Survey Question 5</h2>
-      <p>In what field would AI tools be useful to you?</p>
-      <label><input type="checkbox" name="field" value="text"> <b>Text</b>: blog posts, articles, product descriptions, social media posts, etc.</label><br>
-      <label><input type="checkbox" name="field" value="code"> <b>Code</b>: software programs, websites, etc.</label><br>
-      <label><input type="checkbox" name="field" value="creative"> <b>Creative text formats</b>: poems, code, scripts, musical pieces, email, letters, etc.</label><br>
-      <label><input type="checkbox" name="field" value="visual"> <b>Visual content</b>: images, videos, etc.</label><br>
-      <label><input type="checkbox" name="field" value="audio"> <b>Audio content</b>: podcasts, music, etc.</label><br>
-      <label><input type="checkbox" name="field" value="other"> Other</label><br>
-    </div>
+        <div class="content">
+          <h2>Survey Question 5</h2>
+          <p>In what field would AI tools be useful to you?</p>
+          <label><input type="checkbox" name="field" value="text"> <b>Text</b>: blog posts, articles, product descriptions, social media posts, etc.</label><br>
+          <label><input type="checkbox" name="field" value="code"> <b>Code</b>: software programs, websites, etc.</label><br>
+          <label><input type="checkbox" name="field" value="creative"> <b>Creative text formats</b>: poems, code, scripts, musical pieces, email, letters, etc.</label><br>
+          <label><input type="checkbox" name="field" value="visual"> <b>Visual content</b>: images, videos, etc.</label><br>
+          <label><input type="checkbox" name="field" value="audio"> <b>Audio content</b>: podcasts, music, etc.</label><br>
+          <label><input type="checkbox" name="field" value="other"> Other</label><br>
+        </div>
 
-    <div class="content">
-      <h2>Survey Question 6</h2>
-      <p>What are the tasks that take most of your time in your daily life?</p>
-      <label><input type="checkbox" name="tasks" value="work"> Work-related responsibilities</label><br>
-      <label><input type="checkbox" name="tasks" value="chores"> Household chores and cleaning</label><br>
-      <label><input type="checkbox" name="tasks" value="commuting"> Commuting or travel time</label><br>
-      <label><input type="checkbox" name="tasks" value="personal"> Personal or family commitments</label><br>
-      <label><input type="checkbox" name="tasks" value="leisure"> Leisure and entertainment activities</label><br>
-      <label><input type="checkbox" name="tasks" value="finances"> Managing personal finances</label><br>
-      <label><input type="checkbox" name="tasks" value="health"> Health and fitness routines</label><br>
-      <label><input type="checkbox" name="tasks" value="socializing"> Socializing and maintaining relationships</label><br>
-      <label><input type="checkbox" name="tasks" value="education"> Educational pursuits or professional development</label><br>
-      <label><input type="checkbox" name="tasks" value="other"> Other</label><br>
-    </div>
+        <div class="content">
+          <h2>Survey Question 6</h2>
+          <p>What are the tasks that take most of your time in your daily life?</p>
+          <label><input type="checkbox" name="tasks" value="work"> Work-related responsibilities</label><br>
+          <label><input type="checkbox" name="tasks" value="chores"> Household chores and cleaning</label><br>
+          <label><input type="checkbox" name="tasks" value="commuting"> Commuting or travel time</label><br>
+          <label><input type="checkbox" name="tasks" value="personal"> Personal or family commitments</label><br>
+          <label><input type="checkbox" name="tasks" value="leisure"> Leisure and entertainment activities</label><br>
+          <label><input type="checkbox" name="tasks" value="finances"> Managing personal finances</label><br>
+          <label><input type="checkbox" name="tasks" value="health"> Health and fitness routines</label><br>
+          <label><input type="checkbox" name="tasks" value="socializing"> Socializing and maintaining relationships</label><br>
+          <label><input type="checkbox" name="tasks" value="education"> Educational pursuits or professional development</label><br>
+          <label><input type="checkbox" name="tasks" value="other"> Other</label><br>
+        </div>
 
-    <button class="button" onclick="navigateToPage('page3.html')">Next</button>
-  </div>
+        <button type="button" class="button" onclick="navigateToPage('{{ url_for('page3') }}')">Next</button>
 
+      </div>
+    </form>
   <script>
     function navigateToPage(page) {
-      document.querySelector('.container').style.transform = 'translateX(-100%)';
-      setTimeout(function() {
-        window.location.href = page;
-      }, 500);
+        document.querySelector('.container').style.transform = 'translateX(-100%)';
+        setTimeout(function () {
+            // Manually submit the form before redirecting
+            document.querySelector('form').submit();
+        }, 1000);
     }
-  </script>
+</script>
+
 </body>
 </html>
