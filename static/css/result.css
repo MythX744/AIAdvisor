@@ -35,12 +35,12 @@ body::-webkit-scrollbar {
 }
 
 .survey-responses {
-    margin: 0 0 700px 50px;
+    margin: 0 0 700px 120px;
     padding: 0 0 0 0;
 }
 .survey-responses h2 {
     font-family: "Sora Bold", sans-serif;
-    font-size: 45px;
+    font-size: 52px;
     color: #cccccc;
     text-shadow: 2px 2px 4px #333;
 }
@@ -56,8 +56,39 @@ body::-webkit-scrollbar {
 }
 
 .radar{
-    margin: 0 0 0 30px;
+    margin: 0 30px 0 30px;
     display: flex;
+    justify-content: center;
+}
+
+.radar-section-description-global {
+    padding: 70px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.radar-section-description1{
+    font-family: "Sora SemiBold", sans-serif;
+    font-size: 35px;
+    color: #cccccc;
+    margin: 0 20px 0 20px;
+    text-align: center;
+}
+.radar-section-description2{
+    font-family: "Sora SemiBold", sans-serif;
+    font-size: 32px;
+    color: #333;
+    margin: 0 20px 0 20px;
+    text-align: center;
+}
+.radar-section-description3{
+    font-family: "Sora SemiBold", sans-serif;
+    font-size: 27px;
+    color: #333;
+    margin: 0 20px 0 20px;
+    text-align: center;
 }
 
 footer {
@@ -71,9 +102,9 @@ footer {
 }
 
 #mainBase {
-    margin-top: 50px;
+    margin-top: 80px;
     flex: 1;
-    padding-bottom: 100px;
+    padding-bottom: 150px;
 }
 .containerBase {
     max-width: 1200px;

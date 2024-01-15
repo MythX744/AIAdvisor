@@ -5,12 +5,12 @@ function fetchData() {
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-			console.log('Response:', response.cleaned_data);
+			//console.log('Response:', response.cleaned_data);
 			response.cleaned_data.forEach(function(subArrays, index) {
                 subArrays.forEach(function(subArray, subIndex) {
 				var subArray_cleaned = [subArray];
-				console.log('subArray:', subArray_cleaned);
-				console.log('subIndex:', subIndex);
+				//console.log('subArray:', subArray_cleaned);
+				//console.log('subIndex:', subIndex);
 				drawSpiderChart(subArray_cleaned, subIndex);
 				 });
             });
@@ -23,7 +23,7 @@ function fetchData() {
 
 // Function to draw spider chart using D3.js
 function drawSpiderChart(cleanedData, subIndex) {
-    console.log('Cleaned Data:', cleanedData);
+    //console.log('Cleaned Data:', cleanedData);
     // Your D3.js code here using the cleaned data
     // Adjust IDs, dimensions, or any other parameters as needed
     var margin = {top: 100, right: 100, bottom: 100, left: 100},
@@ -55,7 +55,7 @@ function drawSpiderChart(cleanedData, subIndex) {
 
     var data = cleanedData
 
-    console.log('Data:', data);
+    //console.log('Data:', data);
 
     if(subIndex == 0) {
 		RadarChart(".radarChart1", data, radarChartOptions);
@@ -99,7 +99,7 @@ function RadarChart(id, data , options) {
 		}));
 	}));
 
-	console.log('maxValue:', maxValue);
+	//console.log('maxValue:', maxValue);
 
 	var allAxis = (data[0].map(function(i, j){return i.axis})),	//Names of each axis
 		total = allAxis.length,					//The number of different axes
@@ -341,38 +341,47 @@ function RadarChart(id, data , options) {
 }//RadarChart page loads
 
 function searchAxis(targetAxisArray) {
-	$.ajax({
-        url: '/get_cleaned_data',
-        type: 'GET',
-        dataType: 'json',
-        success: function(response) {
-			console.log('Response:', response.cleaned_data);
-			var count = 0;
-			var result = [];
-			response.cleaned_data.forEach(function(subArrays, index) {
-                subArrays.forEach(function(subArray, subIndex) {
-				var subArray_cleaned = [subArray];
-				var innerArray = subArray_cleaned[0];
-				var innerResult = [];
-				for (var i = 0; i < innerArray.length; i++) {
-					for (var j = 0; j < targetAxisArray[count].length; j++) {
-						if (innerArray[i].axis === targetAxisArray[count][j]) {
-							innerResult.push(innerArray[i].value)
-						}
-					}
-				}
-				result.push(innerResult);
-				count++;
-				});
-            });
-			return result;
-        },
-        error: function(error) {
-            console.error('Error fetching cleaned data:', error);
-        }
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: '/get_cleaned_data',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+				console.log('Response:', response.cleaned_data);
+                var count = 0;
+                var result = [];
+                response.cleaned_data.forEach(function(subArrays, index) {
+                    subArrays.forEach(function(subArray, subIndex) {
+                        var subArray_cleaned = [subArray];
+                        var innerArray = subArray_cleaned[0];
+                        var innerResult = [];
+						console.log('targetAxisArray:', targetAxisArray)
+                        for (var i = 0; i < innerArray.length; i++) {
+							//console.log('targetAxisArray[count]:', targetAxisArray[count]);
+                            for (var j = 0; j < targetAxisArray[count][0].length; j++) {
+								//console.log('innerArray[i].axis:', innerArray[i].axis);
+								//console.log('targetAxisArray[count][j]:', targetAxisArray[count][0][j]);
+                                if (innerArray[i].axis === targetAxisArray[count][0][j]) {
+                                    innerResult.push(innerArray[i].value);
+                                }
+                            }
+                        }
+                        result.push(innerResult);
+                        count++;
+                    });
+                });
+				console.log('Result:', result);
+				ToPercentage(result);
+                resolve(result);
+            },
+            error: function(error) {
+                console.error('Error fetching cleaned data:', error);
+                reject(error);
+            }
+        });
     });
-
 }
+
 document.addEventListener('DOMContentLoaded', function() {
     fetchData();
 });

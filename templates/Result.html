@@ -21,21 +21,27 @@
     <div class="radar-section" id="radar-section" data-userdata='{{ all_data | tojson | safe }}'>
         <div class="radar">
             <div class="radarChart1" id="radarChart"></div>
-            <div class="radar-section-description"></div>
+            <div class="radar-section-description-global">
+                <div class="radar-section-description1"></div>
+            </div>
         </div>
         <div class="radar">
+            <div class="radar-section-description-global">
+                <div class="radar-section-description2"></div>
+            </div>
             <div class="radarChart2" id="radarChart"></div>
-            <div class="radar-section-description"></div>
         </div>
         <div class="radar">
             <div class="radarChart3" id="radarChart"></div>
-            <div class="radar-section-description"></div>
+            <div class="radar-section-description-global">
+                <div class="radar-section-description3"></div>
+            </div>
         </div>
     </div>
 </main>
     <footer>
         <div class="containerBase">
-            &copy; 2024 tttttttttttteesst
+            &copy; 2024 AI Advisor
         </div>
     </footer>
 </div>
@@ -61,8 +67,25 @@
             extractedDataArray[2].push(item['tasks']);
         }
     });
-
-    // Log the extracted data array
     console.log('Extracted Data Array:', extractedDataArray);
+
+    searchAxis(extractedDataArray)
+
+    function ToPercentage(searchResult) {
+        var percentageArray = searchResult.map(function (subArray) {
+            return subArray.map(function (value) {
+                // Convert the string value to a number and then divide by 221
+                var number = (Number(value) / 221) * 100;
+                return number.toFixed(2);
+            });
+        });
+        console.log('Percentage Array:', percentageArray);
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < percentageArray[i].length; j++) {
+                var descriptionDiv = document.querySelector('.radar-section-description' + (i + 1));
+                descriptionDiv.innerHTML += 'You and ' + percentageArray[i][j] + '% of people have chosen : '+ extractedDataArray[i][0][j] + '<br>';
+            }
+        }
+    }
 
 </script>
