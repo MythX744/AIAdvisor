@@ -40,12 +40,14 @@
     </footer>
 </div>
 <script src="/static/js/result.js"></script>
+<script src="/static/js/advisor.js"></script>
 </body>
 </html>
 <script>
     var allData = JSON.parse(document.getElementById('radar-section').getAttribute('data-userdata'));
     console.log('All Data:', allData);
 
+    advisor(allData);
 
     var extractedDataArray = [[], [], []];
 

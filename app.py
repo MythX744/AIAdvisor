@@ -393,7 +393,7 @@ with app.app_context():
     # Create the tables
     db.create_all()
     # Insert the first 5 AIs
-    ai1 = AIRecords(name='CopyAI', description='Text generation tool', field='Text', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='Trial', task='Text-related tasks')
+    ai1 = AIRecords(name='CopyAI', description='Text generation tool', field='Text', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='free', task='Text-related tasks')
     ai2 = AIRecords(name='ChatGPT 3.5', description='Language model', field='Text, Code', expectation='Profiling and Prediction, Assessment and Evaluation, Personalization, Intelligent Tutoring Systems', performance_rate=8, personaldata='Low', price='free, 200+', task='Text and code-related tasks')
     ai3 = AIRecords(name='Hivemind', description='Text analysis tool', field='Text', expectation='Profiling and Prediction', performance_rate=6, personaldata='Low', price='200+', task='Text-related tasks')
     ai4 = AIRecords(name='WordAI', description='Text rewriting tool', field='Text', expectation='Profiling and Prediction', performance_rate=6, personaldata='Low', price='11-50', task='Text-related tasks')
