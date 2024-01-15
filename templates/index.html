@@ -126,6 +126,9 @@
             </ul>
         </div>
 
+        <!-- Include D3.js script -->
+        {{ d3_script }}
+
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar">
@@ -159,7 +162,7 @@
                     <div class="cardHeader">
                         <h2>{{ title }}</h2>
                     </div>
-                    <img src="data:image/png;base64,{{ plot_url }}" alt="hh" style="align-self">
+                    <img id="static-image" src="data:image/png;base64,{{ plot_url }}" alt="hh">
                 </div>
 
                 <!-- ================= New Customers ================ -->

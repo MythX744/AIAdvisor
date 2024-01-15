@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Bar Chart</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        /* Add your styles here */
+    </style>
+</head>
+<body>
+
+<div class="chart-container" id="chart-container"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Your D3.js code goes here
+        d3.json('/chart1-data', function (data) {
+            // Assuming '/chart1-data' is the route that provides your chart data
+            createAnimatedBarChart(data);
+        });
+    });
+
+    function createAnimatedBarChart(data) {
+        // Set up the chart dimensions
+        const width = 500;
+        const height = 300;
+        const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+
+        // Create SVG container
+        const svg = d3.select("#chart-container")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // X and Y scales
+        const xScale = d3.scaleBand()
+            .domain(data.categories)
+            .range([0, width])
+            .padding(0.1);
+
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max(data.data, d => d3.max(Object.values(d).slice(1)))])
+            .range([height, 0]);
+
+        // Add X and Y axes
+        svg.append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(d3.axisBottom(xScale));
+
+        svg.append("g")
+            .call(d3.axisLeft(yScale));
+
+        // Create bars
+        const bars = svg.selectAll(".bar")
+            .data(data.data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => xScale(d.category))
+            .attr("width", xScale.bandwidth())
+            .attr("y", height)
+            .attr("height", 0)
+            .attr("fill", (d, i) => d3.schemeCategory10[i % 10]); // Use color scheme
+
+        // Animate bars
+        bars.transition()
+            .duration(1000)
+            .delay((d, i) => i * 100) // Delay for each bar
+            .attr("y", d => yScale(d.Student))
+            .attr("height", d => height - yScale(d.Student));
+    }
+</script>
+</body>
+</html>

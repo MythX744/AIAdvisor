@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session
+from model import db, AIRecords
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -33,8 +34,6 @@ data_exploded2 = df.explode('separated-Field')
 # Handle missing values
 data_exploded2.dropna(subset=['separated-Field'], inplace=True)
 choices_counts2 = data_exploded2['separated-Field'].value_counts()
-
-
 
 # Tasks
 df['separated-Tasks'] = df['Tasks'].str.split(';')
@@ -326,7 +325,7 @@ def generate_chart8():
     "Creative text formats" and "Visual content" also have significant counts, showing, if to a lesser extent, AI's role in artistic and multimedia undertakings. 
     The least perceived utility is in "Audio content" and "Study," suggesting these areas may currently have less AI integration or awareness about AI's capabilities 
     among the respondents.''',
-    '''
+                '''
     The graphic depicts a trend in which AI is most likely to impact areas with a high textual component, maybe due to the maturity of AI in natural language 
     processing, which can efficiently support these jobs. The significant figure for "Code" shows an acknowledgement of AI's rising significance in automating 
     and assisting complex problem-solving processes in technical sectors. However, the lower value perception in "Audio content" and "Study" could indicate either 
@@ -347,11 +346,11 @@ def generate_chart9():
     plot_url = convert(plt)
     analysis = ['''
 Willingness to Share Data by Status : ''',
-'''Status Variation: Different statuses (like student, employed, retired) show varying levels of willingness to share data.
+                '''Status Variation: Different statuses (like student, employed, retired) show varying levels of willingness to share data.
 Comparative Analysis: Comparing the medians across different statuses can reveal which groups are more open to sharing their data.
 Consistency and Spread: The consistency within each status group and the spread of responses (indicated by the height of the boxes and the whiskers) provide insights into how homogeneous the opinions are within each status group.
 Outliers: Observing any outliers can indicate exceptions or unique cases in specific statuses.''',
-'''Variation by Status: Different statuses (student, employed, retired, etc.) exhibit different levels of willingness to share data. This suggests that one's professional or social status influences their perspective on data sharing.
+                '''Variation by Status: Different statuses (student, employed, retired, etc.) exhibit different levels of willingness to share data. This suggests that one's professional or social status influences their perspective on data sharing.
 Comparison of Groups: Certain statuses might show a higher median, indicating a greater openness to sharing data. For instance, if students have a higher median than retired individuals, it could suggest that those in academia or early in their careers are more comfortable with data sharing.
 Outliers: The presence of outliers in certain groups might indicate exceptions or specific sub-groups within those categories that have distinctly different views on data sharing.
     ''']
@@ -373,7 +372,7 @@ def generate_chart10():
     illustrates participants' expectations regarding AI tool capabilities. "Intelligent Tutoring Systems" ranks as the most anticipated application, 
     slightly surpassing "Assessment and Evaluation" in frequency. "Personalisation" follows closely, indicating a moderately high expectation, 
     while "Profiling and Prediction" is the least expected AI tool feature''',
-    '''
+                '''
     we can interpret that there is a clear preference among participants for AI tools that support educational functions, such as "Intelligent Tutoring Systems" 
     and "Assessment and Evaluation," which have the highest frequencies. The relatively lower expectation for "Personalisation" suggests that while there is interest in 
     AI that tailors experiences or content, it is not as prioritized as the educational applications. The least expectation for "Profiling and Prediction" could indicate 
@@ -383,6 +382,81 @@ def generate_chart10():
     title = '''Chart 10: Distribution of the expectation of AI tools'''
     return plot_url, analysis, title
 
+
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///airecords.db'
+db.init_app(app)
+
+# Set up the application context
+with app.app_context():
+    # Create the tables
+    db.create_all()
+    # Insert the first 5 AIs
+    ai1 = AIRecords(name='CopyAI', description='Text generation tool', field='Text', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='free', task='Text-related tasks')
+    ai2 = AIRecords(name='ChatGPT 3.5', description='Language model', field='Text, Code', expectation='Profiling and Prediction, Assessment and Evaluation, Personalization, Intelligent Tutoring Systems', performance_rate=8, personaldata='Low', price='free, 200+', task='Text and code-related tasks')
+    ai3 = AIRecords(name='Hivemind', description='Text analysis tool', field='Text', expectation='Profiling and Prediction', performance_rate=6, personaldata='Low', price='200+', task='Text-related tasks')
+    ai4 = AIRecords(name='WordAI', description='Text rewriting tool', field='Text', expectation='Profiling and Prediction', performance_rate=6, personaldata='Low', price='11-50', task='Text-related tasks')
+    ai5 = AIRecords(name='Quillbot', description='Paraphrasing tool', field='Text', expectation='Profiling and Prediction', performance_rate=6, personaldata='Low', price='11-50', task='Text-related tasks')
+
+    # Add and commit the records
+    db.session.add_all([ai1, ai2, ai3, ai4, ai5])
+    db.session.commit()
+
+    # Insert the next 5 AIs
+    ai6 = AIRecords(name='Jasper', description='AI-powered personal assistant', field='Text', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='51-200', task='Household chores and cleaning')
+    ai7 = AIRecords(name='OpenAI Codex', description='AI for code generation', field='Code', expectation='Profiling and Prediction', performance_rate=8, personaldata='Low', price='11-50', task='Code-related tasks')
+    ai8 = AIRecords(name='Copilot', description='AI-powered code completion', field='Code', expectation='Profiling and Prediction', performance_rate=8, personaldata='Low', price='11-50', task='Code-related tasks')
+    ai9 = AIRecords(name='DALL-E 2', description='AI for visual content creation', field='Visual Content', expectation='Profiling and Prediction', performance_rate=8, personaldata='Low', price='11-50', task='Visual content creation')
+    ai10 = AIRecords(name='Leonardo AI', description='AI for visual content creation', field='Visual Content', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='11-50', task='Visual content creation')
+
+    # Add and commit the records
+    db.session.add_all([ai6, ai7, ai8, ai9, ai10])
+    db.session.commit()
+
+    # Insert the next 5 AIs
+    ai11 = AIRecords(name='Synthesia', description='AI for visual content creation', field='Visual Content', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='11-50, 51-200', task='Visual content creation')
+    ai12 = AIRecords(name='Runway', description='AI for visual content creation', field='Visual Content', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='11-50, 51-200', task='Visual content creation')
+    ai13 = AIRecords(name='Luma', description='AI for visual content creation', field='Visual Content', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='51-200', task='Visual content creation')
+    ai14 = AIRecords(name='AudioSonic', description='AI for audio content creation', field='Audio Content', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='11-50, 51-200', task='Audio content creation')
+    ai15 = AIRecords(name='Speechify', description='AI for audio content creation', field='Audio Content', expectation='Profiling and Prediction', performance_rate=7, personaldata='Low', price='200+', task='Audio content creation')
+
+    # Add and commit the records
+    db.session.add_all([ai11, ai12, ai13, ai14, ai15])
+    db.session.commit()
+
+    # Insert the next 5 AIs
+    ai16 = AIRecords(name='Fitbit', description='Health and fitness tracking device', field=None, expectation='Health and fitness', performance_rate=9, personaldata='A Lot', price='free', task='Health and fitness tracking')
+    ai17 = AIRecords(name='MyFitnessPal', description='Health and fitness tracking app', field=None, expectation='Health and fitness', performance_rate=8, personaldata='A Lot', price='11-50', task='Health and fitness tracking')
+    ai18 = AIRecords(name='Nest', description='Smart home automation system', field=None, expectation='Smart home automation', performance_rate=9, personaldata='A Lot', price='free', task='Smart home automation')
+    ai19 = AIRecords(name='SmartThings', description='Smart home automation platform', field=None, expectation='Smart home automation', performance_rate=8, personaldata='A Lot', price='free', task='Smart home automation')
+    ai20 = AIRecords(name='Adaptive Learning Systems', description='AI for educational purposes', field=None, expectation='Educational purposes', performance_rate=7, personaldata='A Lot', price='200+', task='Educational purposes')
+
+    # Add and commit the records
+    db.session.add_all([ai16, ai17, ai18, ai19, ai20])
+    db.session.commit()
+
+
+    # Insert the next 5 AIs
+    ai21 = AIRecords(name='Apple Siri', description='Apple\'s virtual assistant', field=None, expectation='Personal assistant tasks', performance_rate=8, personaldata='A Lot', price='free', task='Personal assistant tasks')
+    ai22 = AIRecords(name='Google Assistant', description='Google\'s virtual assistant', field=None, expectation='Personal assistant tasks', performance_rate=8, personaldata='A Lot', price='free', task='Personal assistant tasks')
+    ai23 = AIRecords(name='Amazon Alexa', description='Amazon\'s virtual assistant', field=None, expectation='Personal assistant tasks', performance_rate=8, personaldata='A Lot', price='free', task='Personal assistant tasks')
+    ai24 = AIRecords(name='Microsoft Cortana', description='Microsoft\'s virtual assistant', field=None, expectation='Personal assistant tasks', performance_rate=8, personaldata='A Lot', price='free', task='Personal assistant tasks')
+    ai25 = AIRecords(name='Facebook Portal', description='Smart display with video calling', field=None, expectation='Socializing and maintaining relationships', performance_rate=8, personaldata='A Lot', price='free', task='Socializing and maintaining relationships')
+
+    # Add and commit the records
+    db.session.add_all([ai21, ai22, ai23, ai24, ai25])
+    db.session.commit()
+
+    # Insert the next 5 AIs
+    ai26 = AIRecords(name='Google Search', description='Search engine by Google', field=None, expectation='Information retrieval and search', performance_rate=9, personaldata='A Lot', price='free', task='Information retrieval and search')
+    ai27 = AIRecords(name='Amazon Echo', description='Smart speaker by Amazon', field=None, expectation='Smart home automation', performance_rate=8, personaldata='A Lot', price='free', task='Smart home automation')
+    ai28 = AIRecords(name='Google Maps', description='Mapping and navigation service by Google', field=None, expectation='Commuting or travel assistance', performance_rate=9, personaldata='A Lot', price='free', task='Commuting or travel assistance')
+    ai29 = AIRecords(name='Grammarly', description='Writing assistance tool', field=None, expectation='Profiling and Prediction', performance_rate=8, personaldata='A Lot', price='free, 11-50', task='Text-related tasks')
+
+    # Add and commit the records
+    db.session.add_all([ai26, ai27, ai28, ai29])
+    db.session.commit()
 
 @app.route('/', methods=['GET'])
 def index():
@@ -453,9 +527,11 @@ def chart10():
 def bonus():
     return render_template('welcome.html')
 
-#Mehdi's part:
+
+# Mehdi's part:
 app.config['user_data'] = []
 app.config['advisor_data'] = []
+
 
 @app.route('/page1', methods=['GET', 'POST'])
 def page1():
@@ -468,6 +544,7 @@ def page1():
         return redirect(url_for('page2'))
 
     return render_template('page1.html')
+
 
 @app.route('/page2', methods=['GET', 'POST'])
 def page2():
@@ -489,12 +566,14 @@ def page3():
         spending = request.form['spending']
         expectations = request.form.getlist('expectations')
         usage_manner = request.form['usage_manner']
-        app.config['user_data'].append({'spending': spending, 'expectations': expectations, 'usage_manner': usage_manner})
+        app.config['user_data'].append(
+            {'spending': spending, 'expectations': expectations, 'usage_manner': usage_manner})
         app.config['advisor_data'].append({'spending': spending, 'expectations': expectations})
 
         return redirect(url_for('page4'))
 
     return render_template('page3.html')
+
 
 @app.route('/page4', methods=['GET', 'POST'])
 def page4():
@@ -521,6 +600,7 @@ def result():
     all_data = app.config['user_data']
     print(all_data)
     return render_template('result.html', all_data=all_data)
+
 
 @app.route('/get_cleaned_data', methods=['GET'])
 def get_cleaned_data():
@@ -557,6 +637,7 @@ def get_cleaned_data():
 
     print(cleaned_data)
     return jsonify(cleaned_data=cleaned_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
