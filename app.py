@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 from model import db, AIRecords
+from sqlalchemy import or_
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -384,7 +385,6 @@ def generate_chart10():
 
 
 
-app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///airecords.db'
 db.init_app(app)
 
@@ -637,6 +637,60 @@ def get_cleaned_data():
 
     print(cleaned_data)
     return jsonify(cleaned_data=cleaned_data)
+
+
+@app.route('/get_advisor_data', methods=['POST'])
+def get_advisor_data():
+    data = request.get_json()
+    extractedDataArray = data['extractedDataArray']
+    # Process the data as needed
+    print(extractedDataArray)
+    price = extractedDataArray[0]
+    expectation = []
+    for i in range(len(extractedDataArray[1][0])):
+        expectation.append(extractedDataArray[1][0][i])
+    field = []
+    for i in range(len(extractedDataArray[2][0])):
+        field.append(extractedDataArray[2][0][i])
+    task = []
+    for i in range(len(extractedDataArray[3][0])):
+        task.append(extractedDataArray[3][0][i])
+    performance_rate = extractedDataArray[4]
+    personaldata = extractedDataArray[5]
+
+    query = AIRecords.query
+
+    # Filters
+    filters = [price, expectation, field, task, performance_rate, personaldata]
+
+    for i, condition in enumerate(filters):
+        if i == 0:
+            query = query.filter(AIRecords.price.in_(condition))
+        else:
+            if i in [1, 2, 3]:  # Assuming 1 corresponds to 'expectation', 2 to 'field', and 3 to 'task'
+                # Check if any element in the condition array is present in the corresponding column
+                or_conditions = [AIRecords.expectation.contains(c) for c in condition]
+                query = query.filter(or_(*or_conditions))
+            elif i == 4:
+                query = query.filter(AIRecords.performance_rate.in_(condition))
+            elif i == 5:
+                query = query.filter(AIRecords.personaldata.in_(condition))
+
+    # Execute the final query
+    results = query.all()
+
+    if not results and len(filters) > 1:
+        # If no results in the last iteration, return results from the previous iteration
+        results = AIRecords.query.filter(AIRecords.price.in_(filters[0])).all()
+        message = "false"
+    else:
+        message = "true"
+
+    # Process the results as needed
+    processed_results = [{'name': result.name, 'description': result.description} for result in results]
+
+    return jsonify({'results': processed_results, 'message': message})
+
 
 
 if __name__ == '__main__':

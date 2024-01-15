@@ -33,23 +33,47 @@ body::-webkit-scrollbar {
     z-index: 0;
     pointer-events: none;
 }
+.your-aitools {
+    margin: 50px 0 0 80px;
+    padding: 0 0 0 0;
+    background: #f0f0f0;
+    display: inline-block;
+    border-radius: 20px;
+    width: auto;
+}
+.your-aitools-title {
+    font-family: "Sora Bold", sans-serif;
+    font-size: 40px;
+    color: #333;
+    text-shadow: 2px 2px 4px #f0f0f0;
+    margin: 40px 0 0 40px;
+}
+.message {
+    font-family: "Sora SemiBold", sans-serif;
+    font-size: 27px;
+    color: #333;
+    margin: 40px 40px 20px 60px;
+}
+.your-aitools-container{
+    margin: 0 40px 40px 0;
+}
+.your-aitools-container p {
+    font-family: "Sora Regular", sans-serif;
+    font-size: 25px;
+    color: #333;
+    margin: 0 0 0 60px;
+}
 
 .survey-responses {
-    margin: 0 0 700px 120px;
+    margin: 0 0 120px 0;
     padding: 0 0 0 0;
 }
-.survey-responses h2 {
+.survey-responses-title {
     font-family: "Sora Bold", sans-serif;
     font-size: 52px;
-    color: #cccccc;
+    color: #f0f0f0;
     text-shadow: 2px 2px 4px #333;
-}
-.survey-responses p {
-    font-family: "Sora SemiBold", sans-serif;
-    font-size: 30px;
-    color: #cccccc;
-    margin: 0 0 0 10px;
-    text-shadow: 2px 2px 4px #333;
+    margin: 0 0 0 120px;
 }
 .radar-section {
 
@@ -72,7 +96,7 @@ body::-webkit-scrollbar {
 .radar-section-description1{
     font-family: "Sora SemiBold", sans-serif;
     font-size: 35px;
-    color: #cccccc;
+    color: #f0f0f0;
     margin: 0 20px 0 20px;
     text-align: center;
 }
